@@ -1,5 +1,5 @@
 import {Response, Request} from 'express'
-import {OutputErrorsType} from '../input-output-types/video-types'
+import {OutputErrorsType, OutputVideoType} from '../input-output-types/video-types'
 import {db} from '../db/db'
 import {InputVideoType, Resolutions} from '../input-output-types/video-types'
 
@@ -28,11 +28,16 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
     }
 
     // если всё ок - добавляем видео
-    const newVideo: any /*VideoDBType*/ = {
+    const newVideo: OutputVideoType /*VideoDBType*/ = {
         ...req.body,
+        createdAt: new Date().toISOString(),
         id: Date.now() + Math.random(),
+        canBeDownload: false,
+        minAgeRestriction: null,
+        publicationDate: new Date().toISOString(),
+
         // ...
-    }
+    }// as unknown as OutputVideoType
     db.videos = [...db.videos, newVideo]
 
     res
