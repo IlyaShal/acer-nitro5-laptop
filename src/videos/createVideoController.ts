@@ -1,8 +1,9 @@
 import {Response, Request} from 'express'
-import {OutputErrorsType, OutputVideoType} from '../input-output-types/video-types'
+import {OutputErrorsType, VideoDBType} from '../input-output-types/video-types'
 import {db} from '../db/db'
 import {InputVideoType, Resolutions} from '../input-output-types/video-types'
 import { addDays } from "date-fns"
+
 
 const inputValidation = (video: InputVideoType) => {
     const errors: OutputErrorsType = { // объект для сбора ошибок
@@ -37,11 +38,13 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
 // Преобразуем новую дату в строку в формате ISO
  //  let publicationDate = currentDate.toISOString();
     // если всё ок - добавляем видео
-    const newVideo: OutputVideoType /*VideoDBType*/ = {
-        ...req.body,
+    const newVideo: VideoDBType /*VideoDBType*/ = {
+        author: req.body.author,
+        title: req.body.title,
+        availableResolutions: req.body.availableResolutions,
         createdAt: new Date().toISOString(),
         id: Date.now() + Math.random(),
-        canBeDownload: false,
+        canBeDownloaded: false,
         minAgeRestriction: null,
         //publicationDate: new Date().toISOString(),
         publicationDate: addDays(new Date(), 1).toISOString()
@@ -50,6 +53,7 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
     }// as unknown as OutputVideoType
     db.videos = [...db.videos, newVideo]
 
+    console.log(201)
     console.log(newVideo)
 
     res

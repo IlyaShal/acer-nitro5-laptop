@@ -15,13 +15,22 @@ export type OutputVideoType = {
     id: number
     title: string
     author: string
-    canBeDownload: boolean
+    canBeDownloaded: boolean
     minAgeRestriction: null
     createdAt: string
     publicationDate: string
     availableResolutions: Resolutions[]
 }
-
+export type VideoDBType = {
+    id: number
+    title: string
+    author: string
+    canBeDownloaded: boolean
+    minAgeRestriction: null
+    createdAt: string
+    publicationDate: string
+    availableResolutions: Resolutions[]
+}
 export type InputVideoType = {
     title: string
     author: string
