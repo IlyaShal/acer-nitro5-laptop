@@ -27,7 +27,14 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
             .json(errors)
         return
     }
+// Получаем текущую дату
+    let currentDate = new Date();
 
+// Добавляем один день
+    currentDate.setDate(currentDate.getDate() + 1);
+
+// Преобразуем новую дату в строку в формате ISO
+    let publicationDate = currentDate.toISOString();
     // если всё ок - добавляем видео
     const newVideo: OutputVideoType /*VideoDBType*/ = {
         ...req.body,
@@ -35,7 +42,7 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
         id: Date.now() + Math.random(),
         canBeDownload: false,
         minAgeRestriction: null,
-        publicationDate: new Date().toISOString(),
+        publicationDate: publicationDate,
 
         // ...
     }// as unknown as OutputVideoType
