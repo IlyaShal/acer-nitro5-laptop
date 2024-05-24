@@ -20,6 +20,7 @@ const inputValidation = (video: InputVideoType) => {
 
 export const createVideoController = (req: Request<any, any, InputVideoType>, res: Response<any /*OutputVideoType*/ | OutputErrorsType>) => {
     const errors = inputValidation(req.body)
+    console.log('RENDER');
     if (errors.errorsMessages.length) { // если есть ошибки - отправляем ошибки
         res
             .status(400)
@@ -40,7 +41,9 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
     }// as unknown as OutputVideoType
     db.videos = [...db.videos, newVideo]
 
+    console.log(newVideo)
+
     res
         .status(201)
-        .json(newVideo)
+        .send(newVideo)
 }
