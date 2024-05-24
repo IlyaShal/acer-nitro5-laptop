@@ -2,6 +2,7 @@ import {Response, Request} from 'express'
 import {OutputErrorsType, OutputVideoType} from '../input-output-types/video-types'
 import {db} from '../db/db'
 import {InputVideoType, Resolutions} from '../input-output-types/video-types'
+import { addDays } from "date-fns"
 
 const inputValidation = (video: InputVideoType) => {
     const errors: OutputErrorsType = { // объект для сбора ошибок
@@ -28,13 +29,13 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
         return
     }
 // Получаем текущую дату
-    let currentDate = new Date();
+ // let currentDate = new Date();
 
 // Добавляем один день
-    currentDate.setDate(currentDate.getDate() + 1);
+ //   currentDate.setDate(currentDate.getDate() + 1);
 
 // Преобразуем новую дату в строку в формате ISO
-    let publicationDate = currentDate.toISOString();
+ //  let publicationDate = currentDate.toISOString();
     // если всё ок - добавляем видео
     const newVideo: OutputVideoType /*VideoDBType*/ = {
         ...req.body,
@@ -42,7 +43,8 @@ export const createVideoController = (req: Request<any, any, InputVideoType>, re
         id: Date.now() + Math.random(),
         canBeDownload: false,
         minAgeRestriction: null,
-        publicationDate: publicationDate,
+        //publicationDate: new Date().toISOString(),
+        publicationDate: addDays(new Date(), 1).toISOString()
 
         // ...
     }// as unknown as OutputVideoType
