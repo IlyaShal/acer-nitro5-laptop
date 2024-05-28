@@ -35,7 +35,7 @@ export type InputVideoType = {
     title: string
     author: string
     availableResolutions: Resolutions[]
-
+    canBeDownloaded: boolean
 }
 
 export type ErrorType = {

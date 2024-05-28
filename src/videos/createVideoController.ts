@@ -12,6 +12,33 @@ const videoTitleValidation = (errors: OutputErrorsType, title: any) => {
         })
     }
 }
+const minAgeRestrictionValidation = (errors: OutputErrorsType, minAgeRestriction: any) => {
+    if(!minAgeRestriction || minAgeRestriction < 0 || minAgeRestriction >18 || minAgeRestriction === "string")
+        errors.errorsMessages.push({
+            message: 'error!!!!', field: 'minAgeRestriction'
+        })
+}
+const canBeDownloadedValidation = (errors: OutputErrorsType, canBeDownloaded: any) => {
+    if(!canBeDownloaded || canBeDownloaded === "string" || !canBeDownloaded?.trim()) {
+        errors.errorsMessages.push({
+            message: 'error!!!!', field: 'canBeDownloaded'
+        })
+    }
+}
+const createdAtValidation = (errors: OutputErrorsType, createdAt: any) => {
+    if(!createdAt || !/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(createdAt)) {
+        errors.errorsMessages.push({
+            message: 'error!!!!', field: 'createdAt'
+        })
+    }
+}
+const publicationDateValidation = (errors: OutputErrorsType, publicationDate: any) => {
+    if(!publicationDate || !/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(publicationDate)) {
+        errors.errorsMessages.push({
+            message: 'error!!!!', field: 'publicationDate'
+        })
+    }
+}
 
 const videoAuthorValidation = (errors: OutputErrorsType, author: any) => {
         if(!author || !author?.trim() || !(typeof author === "string") || author.length > 20 || author.length < 0) {
@@ -37,7 +64,7 @@ const inputValidation = (video: Partial<InputVideoType>) => {
         errorsMessages: []
     }
 // ...
-
+    canBeDownloadedValidation(errors, video.canBeDownloaded)
     videoAuthorValidation(errors, video.author)
     videoTitleValidation(errors, video.title)
     availableResolutionsTitleValidation(errors, video.availableResolutions)
