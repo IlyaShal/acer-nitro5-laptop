@@ -5,6 +5,7 @@ import {VideoDBType} from "../input-output-types/video-types";
 export type DBType = { // типизация базы данных (что мы будем в ней хранить)
     videos: VideoDBType[]
     // some: any[]
+
 }
 
 export const db: DBType = { // создаём базу данных (пока это просто переменная)
