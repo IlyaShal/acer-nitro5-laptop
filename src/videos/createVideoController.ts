@@ -64,7 +64,7 @@ const inputValidation = (video: Partial<InputVideoType>) => {
         errorsMessages: []
     }
 // ...
-    canBeDownloadedValidation(errors, video.canBeDownloaded)
+    //canBeDownloadedValidation(errors, video.canBeDownloaded)
     videoAuthorValidation(errors, video.author)
     videoTitleValidation(errors, video.title)
     availableResolutionsTitleValidation(errors, video.availableResolutions)
