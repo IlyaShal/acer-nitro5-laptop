@@ -18,5 +18,10 @@ app.delete('/testing/all-data', (req, res) => {
     setDB()
     res.sendStatus(204)
 })
+// app.post(['/', '/:id'], req, (req, res) => {
+//     const params = req.params;
+//     const id = req.params.id;
+//     const queryParams = req.query;
+// })
 app.use(SETTINGS.PATH.VIDEOS, videosRouter)
 // app.use(SETTINGS.PATH.VIDEOS, videosRouter)

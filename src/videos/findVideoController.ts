@@ -31,7 +31,7 @@ export const findByIdVideoController = (req: Request, res: Response<any, any>,) 
 
     if(!video ){
         return res.sendStatus(404)
-    } else {
+    } else  {
          return res
             .status(200)
             .send(video) // отдаём видео в качестве ответа
